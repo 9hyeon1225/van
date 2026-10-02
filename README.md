@@ -124,30 +124,24 @@ MUJOCO_GL=egl python main.py \
 
 #antmaze-teleport-navigate
 MUJOCO_GL=egl python main.py \
-  --env_name antmaze-giant-teleport-singletask-v0 \
+  --env_name antmaze-giant-navigate-singletask-v0 \
   --horizon_length 3 \
   --agent.lmbda 3
 
 #scene-play
 MUJOCO_GL=egl python main.py \
-  --env_name humanoidmaze-giant-navigate-singletask-v0 \
+  --env_name scene-play-singletask-v0 \
   --horizon_length 3 \
   --agent.lmbda 3
 
 #puzzle-3x3-play
 MUJOCO_GL=egl python main.py \
-  --env_name humanoidmaze-giant-navigate-singletask-v0 \
+  --env_name puzzle-3x3-play-singletask-v0 \
   --horizon_length 5 \
-  --agent.lmbda 3
-
-#scene-noisy
-MUJOCO_GL=egl python main.py \
-  --env_name humanoidmaze-giant-navigate-singletask-v0 \
-  --horizon_length 2 \
   --agent.lmbda 3
 
 #puzzle-3x3-noisy
 MUJOCO_GL=egl python main.py \
-  --env_name humanoidmaze-giant-navigate-singletask-v0 \
+  --env_name puzzle-3x3-noisy-singletask-v0 \
   --horizon_length 5 \
   --agent.lmbda 3
