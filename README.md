@@ -65,21 +65,6 @@ across:
 
 ---
 
-## 🛠 Code Structure
-
-├── agent/
-│ └── van.py # VAN-Flow agent (actor–critic with flow + distributional critic)
-├── utils/
-│ ├── encoders.py # Observation encoders
-│ ├── networks.py # ActorVectorField, Value (critic)
-│ └── flax_utils.py # TrainState, ModuleDict
-├── configs/
-│ └── van_config.py # Default hyperparameters
-└── README.md
-
-
----
-
 ## ⚙️ Installation
 
 # Install dependencies
