@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VAN-Flow</title>
+
+  <style>
+    html { font-size: 150%; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      background: #ffffff;
+      color: #111;
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 10px;
+      padding: 0 16px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      margin-bottom: 10px;
+      letter-spacing: -0.4px;
+    }
+
+    .hero .subtitle {
+      font-size: 18px;
+      color: #444;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .brand { font-weight: 800; color: #FF2D8E; }
+
+    .buttons { margin-top: 18px; }
+
+    .buttons a {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 6px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      text-decoration: none;
+      color: #111;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .buttons a:hover { background: #f3f3f3; }
+
+    .section,
+    .video-section {
+      max-width: 1300px;
+      margin: 0 auto 70px auto;
+      padding: 0 20px;
+    }
+
+    .fancy-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 800;
+      margin: 80px 0 10px 0;
+      letter-spacing: -0.5px;
+      position: relative;
+    }
+
+    .fancy-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 5px;
+      margin: 12px auto 0 auto;
+      border-radius: 3px;
+      background: #FF2D8E;
+    }
+
+    /* 🔥 Highlight Box */
+    .highlight-box{
+      margin: 40px auto 50px auto;
+      max-width: 1200px;
+      border-radius: 14px;
+      padding: 18px 22px;
+      background: rgba(255, 45, 142, 0.08);
+      border: 1px solid rgba(255, 45, 142, 0.25);
+      text-align: center;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .highlight-box .emph{
+      color: #FF2D8E;
+      font-weight: 900;
+    }
+
+    /* 🧾 Abstract Gray Box */
+    .abstract-box {
+      max-width: 1100px;
+      margin: 0 auto 60px auto;
+      padding: 32px 36px;
+      background: #ffffff;
+      border: 1px solid #e6e6e6;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      line-height: 1.75;
+      font-size: 0.95rem;
+      text-align: justify;
+    }
+
+    /* Reviewer Note Banner */
+    .reviewer-note {
+      max-width: 1100px;
+      margin: 0 auto 18px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .reviewer-note p {
+      font-size: 36px;
+      font-weight: 900;
+      color: #111;
+      letter-spacing: -0.3px;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .reviewer-note .reviewer-id {
+      color: #FF2D8E;
+      font-weight: 900;
+    }
+
+    /* ==========================================
+       ✅ QUALITATIVE VIDEO (2 videos)
+    ========================================== */
+
+    .pair-header-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 78px 1fr 1fr;
+      align-items: end;
+      margin-bottom: 10px;
+    }
+
+    .pair-title {
+      grid-column: span 2;
+      text-align: center;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .mid-gap { width: 100%; }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 22px 1fr 78px 1fr 22px 1fr;
+      align-items: start;
+    }
+
+    .pair-sep {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #cfcfcf;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .pair-sep::before { content: "|"; }
+
+    .video-card { text-align: center; }
+
+    .video-card p {
+      margin: 6px 0 8px 0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .tag-proposed { color: #FF2D8E; }
+    .tag-baseline { color: #444; }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      border: 1px solid #eee;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+
+    .task-title{
+      text-align: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.2px;
+    }
+
+    .split-label{
+      position:absolute;
+      top: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.2px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+
+    .split-label.left  { left: 12px;  color:#FF2D8E; }
+    .split-label.right { right: 12px; color:#eaeaea; }
+
+    .split-line{
+      position:absolute;
+      top:0; bottom:0;
+      left:50%;
+      width:2px;
+      transform: translateX(-1px);
+      background: rgba(255,255,255,0.25);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: #e8e8e8;
+      margin: 70px 0 40px 0;
+    }
+
+    @media (max-width: 1000px) {
+      .pair-header-row { grid-template-columns: 1fr; gap: 8px; }
+      .pair-title { grid-column: auto; }
+      .mid-gap, .pair-sep { display: none; }
+      .video-grid { grid-template-columns: 1fr; gap: 18px; }
+      .hero h1 { font-size: 34px; }
+      .task-title { font-size: 17px; }
+      .split-label { font-size: 17px; }
+      .reviewer-note p { font-size: 28px; }
+    }
+
+    /* ===== Two-col cards ===== */
+    .two-col {
+      max-width: 1300px;
+      margin: 0 auto 70px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f6f6f6;
+      border-bottom: 1px solid #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .card-img img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .card-body {
+      padding: 20px 22px 22px 22px;
+    }
+
+    .card-title {
+      margin: 0 0 10px 0;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+    }
+
+    @media (max-width: 1000px) {
+      .two-col { grid-template-columns: 1fr; }
+      .card-img { aspect-ratio: 4 / 3; }
+    }
+
+    /* ===== Method Block ===== */
+    .method-wrap {
+      max-width: 1300px;
+      margin: 0 auto 70px auto;
+      padding: 0 20px;
+    }
+
+    .method-title {
+      font-size: 26px;
+      font-weight: 900;
+      margin: 0 0 14px 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .method-title .accent { color: #FF2D8E; }
+
+    .method-panel {
+      background: #f5f5f5;
+      border: 1px solid #e6e6e6;
+      border-radius: 28px;
+      padding: 18px;
+    }
+
+    .method-row {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .method-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 420px;
+    }
+
+    .method-left .img-box {
+      background: #ffffff;
+      border: 1px solid #ededed;
+      border-radius: 18px;
+      padding: 14px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .method-left .img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .method-left .text-box {
+      background: #ffffff;
+      border: 1px solid #ededed;
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .method-left .text-box .h {
+      font-size: 18px;
+      font-weight: 900;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.2px;
+    }
+
+    .method-left .text-box p {
+      margin: 0;
+      color: #333;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .method-right {
+      background: #000;
+      border: 3px solid #111;
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      min-height: 420px;
+    }
+
+    .method-right video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+
+    @media (max-width: 1000px) {
+      .method-row { grid-template-columns: 1fr; }
+      .method-left, .method-right { min-height: 320px; }
+    }
+
+    /* ===== Simulation Results ===== */
+    .qa {
+      max-width: 1300px;
+      margin: 0 auto 22px auto;
+      padding: 0 20px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      line-height: 1.35;
+    }
+
+    .qa .qtag { font-weight: 900; }
+    .qa .magenta { color: #FF2D8E; font-weight: 900; }
+
+    .result-card {
+      max-width: 1300px;
+      margin: 0 auto 55px auto;
+      padding: 0 20px;
+    }
+
+    .table-frame {
+      background: #ffffff;
+      border: 1px solid #e6e6e6;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .table-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .table-caption {
+      padding: 14px 18px 16px 18px;
+      border-top: 1px solid #eeeeee;
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .table-caption b { color: #111; }
+  </style>
+  
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+
+<body>
+
+  <div class="hero">
+    <h1>
+      <span class="brand">VAN-Flow:</span>
+      Variance-Averse $n$-Step Offline Reinforcement Learning <br>for Sparse Long-Horizon Environments
+    </h1>
+    <p class="subtitle">Reliable-Action Selection for Generative Actors under Heterogeneous Offline Data</p>
+    <p><em>NeurIPS 2026</em></p>
+
+    <div class="buttons">
+      <a href="https://anonymous.4open.science/r/van-BF8B/README.md">💻 Code</a>
+    </div>
+  </div>
+
+
+  <!-- 💡 HIGHLIGHT BOX -->
+  <div class="highlight-box">
+    A <span class="emph">variance-averse expectation</span> over categorical return distributions enables
+    <span class="emph">reliable-action selection</span> for generative actors, stabilizing $n$-step offline RL
+    in sparse, long-horizon environments with heterogeneous behavior data.
+  </div>
+
+
+  <!-- 🎥 QUALITATIVE RESULTS -->
+  <div class="video-section">
+    <div class="video-grid" style="grid-template-columns: 1fr 78px 1fr;">
+
+      <!-- Task 1 -->
+      <div class="video-card">
+        <div class="task-title">antmaze-teleport</div>
+        <div class="video-frame">
+          <div class="split-label left">VAN-Flow</div>
+          <div class="split-label right">Other method</div>
+          <div class="split-line"></div>
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="assets/video/ant_teleport.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="mid-gap"></div>
+
+      <!-- Task 2 -->
+      <div class="video-card">
+        <div class="task-title">puzzle 3x3</div>
+        <div class="video-frame">
+          <div class="split-label left">VAN-Flow</div>
+          <div class="split-label right">Other method</div>
+          <div class="split-line"></div>
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="assets/video/puzzle_3x3.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+  <h2 class="fancy-title">Abstract</h2>
+
+  <!-- 🧾 ABSTRACT (aligned with paper) -->
+  <div class="abstract-box">
+    Generative actors are transforming offline reinforcement learning (RL) by enabling expressive policy classes
+    that model complex action distributions. However, this expressiveness also exposes a key challenge in
+    heterogeneous datasets: generative policies can reproduce <i>unreliable action modes</i> whose return distributions
+    exhibit high variance, occasionally yielding high returns by chance but lacking consistency. Consequently,
+    maximizing the expected $Q$-value alone is insufficient for identifying <i>reliable actions</i>.
+    We propose <b style="color:#FF2D8E;">VAN-Flow</b> (<i>Variance-Averse $n$-step Flow</i>), a framework that promotes
+    reliable actions in generative offline RL. VAN-Flow combines (i) a categorical distributional critic,
+    (ii) a <i>variance-averse expectation</i> operator that smoothly reweights atom probabilities to favor actions
+    with both high returns and low dispersion, and (iii) a flow-matching generative actor guided via rejection
+    sampling. Unlike CVaR or mean–variance objectives, the operator redistributes probability mass over the
+    categorical return distribution without hard truncation or auxiliary penalty terms.
+    Across more than $40$ tasks from D4RL and OGBench, VAN-Flow consistently outperforms strong baselines,
+    with the largest gains in long-horizon and high-variance regimes where reliable action selection becomes critical.
+  </div>
+
+  <div class="section-divider"></div>
+  <h2 class="fancy-title">Variance-Averse Expectation</h2>
+  
+  <div class="two-col">
+    <!-- LEFT CARD -->
+    <div class="card">
+      <div class="card-img">
+        <img src="assets/image/why_variance_averse.svg" alt="Why variance-averse is needed">
+      </div>
+      <div class="card-body">
+        <div class="card-title">Why Variance-Averse is Needed?</div>
+        <p style="margin:0;color:#333;">
+          Under heterogeneous offline data, generative actors faithfully fit the dataset distribution and may reproduce
+          <i>unreliable action modes</i>—action modes whose return distributions exhibit high variance, occasionally
+          yielding high returns by chance but lacking consistency. The expected $Q$-value alone cannot distinguish
+          reliable from unreliable modes, since two state–action pairs with identical $\mathbb{E}[Q]$ can differ
+          drastically in dispersion. This issue is amplified by $n$-step returns in sparse, long-horizon environments.
+        </p>
+      </div>
+    </div>
+  
+    <!-- RIGHT CARD -->
+    <div class="card">
+      <div class="card-img">
+        <img src="assets/image/VaE.png" alt="Variance-averse expectation">
+      </div>
+      <div class="card-body">
+        <div class="card-title">Variance-Averse Expectation</div>
+        <p style="margin:0;color:#333;">
+          VAN-Flow introduces a <i>variance-averse expectation</i> $\mathcal{E}(Z)$ that smoothly reweights atom
+          probabilities of a categorical return distribution via a CDF-based aversion intensity $\delta$,
+          jointly favoring high-return and low-variance actions. Unlike CVaR or mean–variance objectives,
+          $\mathcal{E}(Z)$ requires no hard truncation or auxiliary penalty term and is natively compatible
+          with categorical distributional critics.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+  <h2 class="fancy-title"><b style="color:#FF2D8E;">VAN-Flow</b>: Categorical Critic & Flow-based Actor</h2>
+
+  <!-- Block 1 -->
+  <div class="method-wrap">
+    <div class="method-title"><span class="accent">Categorical</span> Critic</div>
+
+    <div class="method-panel">
+      <div class="method-row">
+
+        <div class="method-left">
+          <div class="img-box">
+            <img src="assets/image/categorical_critic.png" alt="Categorical critic image">
+          </div>
+
+          <div class="text-box">
+            <div class="h">Categorical Distributional Critic</div>
+            <p>
+              The critic $Z_\psi(\boldsymbol{s}_t,\boldsymbol{a}_t)$ models the full $n$-step return distribution
+              over fixed categorical atoms, exposing the variance structure that a regression-based critic cannot.
+              The critic is trained against the projected $n$-step distributional Bellman target with cross-entropy
+              loss, using a variance-averse target action obtained via rejection sampling.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-right">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="assets/video/critic_demo.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Block 2 -->
+  <div class="method-wrap">
+    <div class="method-title"><span class="accent">Flow-based</span> Actor</div>
+
+    <div class="method-panel">
+      <div class="method-row">
+
+        <div class="method-left">
+          <div class="img-box">
+            <img src="assets/image/flow_matching.png" alt="Flow actor image">
+          </div>
+
+          <div class="text-box">
+            <div class="h">Flow-based Actor with $Q$-Guidance</div>
+            <p>
+              The actor is parameterized by a state-conditioned velocity field and trained via flow matching with a
+              single-step Euler $Q$-guidance term using the variance-averse expectation $\mathcal{E}(Z_\psi)$.
+              At inference, $M$ candidate actions are generated and re-ranked via rejection sampling, selecting
+              actions with high expected return <i>and</i> low return dispersion.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-right">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="assets/video/actor_demo.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+  <h2 class="fancy-title">Simulation Results</h2>
+
+  <!-- Q1 -->
+  <div class="qa">
+    <span class="qtag">[<b>Q1.</b>]</span>
+    Does the <span class="magenta">variance-averse expectation</span> enable stable $n$-step learning in sparse, long-horizon offline RL?
+  </div>
+  <div class="result-card">
+    <div class="table-frame">
+      <img src="assets/image/table_antmaze_results.PNG" alt="AntMaze results table">
+      <div class="table-caption">
+        <b>Offline performance on D4RL AntMaze tasks.</b> Scores are normalized following the D4RL protocol.
+        Entries marked "--" indicate results not reported in prior work. VAN-Flow consistently achieves strong results
+        from <i>umaze</i> to <i>large-diverse</i>, indicating that explicit return-variance control is crucial for
+        stably leveraging $n$-step returns in offline RL.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa">
+    <span class="qtag">[<b>Q2.</b>]</span>
+    Does <b style="color:#FF2D8E;">VAN-Flow</b> outperform existing <b><i>flow-based policies</i></b> under heterogeneous, high-variance datasets?
+  </div>
+  <div class="result-card">
+    <div class="table-frame">
+      <img src="assets/image/table_ogbench_results.png" alt="OGBench results table">
+      <div class="table-caption">
+        <b>Performance comparison on OGBench.</b> Task-wise scores across Gaussian-based and Flow-based baselines.
+        On high-variance datasets (e.g., <i>antmaze-large-explore</i>), naive flow-based $n$-step methods (FQL-$n$, BFN-$n$)
+        collapse far more severely than their Gaussian counterpart, while VAN-Flow remains robust.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa">
+    <span class="qtag">[<b>Q3.</b>]</span>
+    Does <b style="color:#FF2D8E;">VAN-Flow</b> serve as a strong initialization for <b><i>off-to-online fine-tuning</i></b>?
+  </div>
+  <div class="result-card">
+    <div class="table-frame">
+      <img src="assets/image/table_off2on_results.png" alt="Offline-to-online results table">
+      <div class="table-caption">
+        <b>Offline-to-online fine-tuning performance.</b> Gray scores indicate offline performance before fine-tuning;
+        bold scores indicate performance after online fine-tuning. VAN-Flow adapts stably online and consistently
+        improves with additional interaction, matching or surpassing the state-of-the-art horizon-reduction baseline.
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
