@@ -5,7 +5,7 @@ This repository contains the official implementation of **VAN-Flow**, a variance
 VAN-Flow addresses the instability of long-horizon $n$-step returns in offline RL by explicitly modeling and penalizing return variance using categorical distributional critics and variance-averse expectations.
 
 📄 **Paper**: *Variance-Averse n-Step Offline Reinforcement Learning for Sparse Long-Horizon Environments* (NeurIPS 2026 accepted)  
-🌐 **Project Page**: https://anonymous42323.github.io/VAN-Flow/
+🌐 **Project Page**: https://9hyeon1225.github.io/van/
 
 ---
 
