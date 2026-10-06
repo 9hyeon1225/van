@@ -713,7 +713,7 @@ def get_config():
             horizon_length=ml_collections.config_dict.placeholder(int), # will be set
             action_chunking=False,  # False means n-step return
             actor_type="best-of-n",
-            actor_num_samples=4,  # for actor_tyfpe="best-of-n" only
+            actor_num_samples=8,  # for actor_tyfpe="best-of-n" only
             use_fourier_features=False,
             fourier_feature_dim=64,
             weight_decay=0.,
