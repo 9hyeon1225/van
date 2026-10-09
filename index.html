@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Guhyeon Kang, Minhae Kwon" />
   <title>VAN-Flow</title>
 
   <style>
@@ -37,6 +38,51 @@
     }
 
     .brand { font-weight: 800; color: #FF2D8E; }
+
+    /* 👤 Authors */
+    .authors {
+      margin: 26px 0 8px 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      line-height: 1.4;
+    }
+
+    .authors .author {
+      display: inline-block;
+      margin: 0 16px;
+      white-space: nowrap;
+    }
+
+    .authors sup,
+    .author-note sup {
+      color: #FF2D8E;
+      font-weight: 800;
+      line-height: 0;
+    }
+
+    .affiliation {
+      margin: 0;
+      font-size: 17px;
+      color: #444;
+      line-height: 1.5;
+      text-wrap: balance;
+    }
+
+    .affiliation span { display: block; }
+
+    .emails {
+      margin: 8px 0 0 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 15px;
+      color: #444;
+    }
+
+    .author-note {
+      margin: 6px 0 0 0;
+      font-size: 14px;
+      color: #666;
+    }
 
     .buttons { margin-top: 18px; }
 
@@ -253,6 +299,10 @@
       .mid-gap, .pair-sep { display: none; }
       .video-grid { grid-template-columns: 1fr; gap: 18px; }
       .hero h1 { font-size: 34px; }
+      .authors { font-size: 20px; }
+      .authors .author { margin: 0 10px; }
+      .affiliation { font-size: 15px; }
+      .emails { font-size: 14px; }
       .task-title { font-size: 17px; }
       .split-label { font-size: 17px; }
       .reviewer-note p { font-size: 28px; }
@@ -471,9 +521,23 @@
       Variance-Averse $n$-Step Offline Reinforcement Learning <br>for Sparse Long-Horizon Environments
     </h1>
     <p class="subtitle">Reliable-Action Selection for Generative Actors under Heterogeneous Offline Data</p>
+
+    <!-- 👤 AUTHORS -->
+    <div class="authors">
+      <span class="author">Guhyeon Kang</span>
+      <span class="author">Minhae Kwon<sup>*</sup></span>
+    </div>
+    <p class="affiliation">
+      <span>Department of Electrical and Computer Engineering</span>
+      <span>Sungkyunkwan University, Republic of Korea</span>
+    </p>
+    <p class="emails">{guhyeon.kang, minhae.kwon}@skku.edu</p>
+    <p class="author-note"><sup>*</sup>Corresponding author</p>
+
     <p><em>NeurIPS 2026</em></p>
 
     <div class="buttons">
+      <a href="https://arxiv.org/abs/2610.07899">📄 Paper</a>
       <a href="https://github.com/9hyeon1225/van">💻 Code</a>
     </div>
   </div>
